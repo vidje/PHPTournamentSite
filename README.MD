@@ -22,6 +22,7 @@
 
 # NEW DB LAYOUT
 
+```
 +-----------------+-------------+-------------+
 |tournament       |player       |team         |
 +-----------------+-------------+-------------+
@@ -40,9 +41,11 @@
 |stream_ru        |
 |date_added       |
 +-----------------+
+```
 
 # SQL
 
+```
 CREATE TABLE tournament
 (
   tournament_id     BINARY(20) UNIQUE PRIMARY KEY,
@@ -57,10 +60,12 @@ CREATE TABLE tournament
   rules             TEXT,
   brackets          VARCHAR(255),
   stream_en         VARCHAR(20),
-  stream_ru         VARCHAR(20)
+  stream_ru         VARCHAR(20),
   date_added        INT(10) UNSIGNED
 );
+```
 
+```
 CREATE TABLE player
 (
   player_id         BINARY(20) UNIQUE PRIMARY KEY,
@@ -70,18 +75,22 @@ CREATE TABLE player
   
   FOREIGN KEY (team_id) REFERENCES team (team_id)
 );
+```
 
+```
 CREATE TABLE team
 (
   team_id           BINARY(20) UNIQUE PRIMARY KEY,
   tournament_id     BINARY(20),
   name              VARCHAR(30),
-  signup_date       INT(10) UNISGNED,
+  signup_date       INT(10) UNSIGNED,
   token             BINARY(16) UNIQUE,
   
   FOREIGN KEY (tournament_id) REFERENCES tournament (tournament_id)
 );
+```
 
+```
 CREATE TABLE team_player
 (
   team_id    INTEGER UNSIGNED NOT NULL,
@@ -94,3 +103,4 @@ CREATE TABLE team_player
   FOREIGN KEY (player_id) REFERENCES player (player_id)
     ON DELETE CASCADE ON UPDATE CASCADE
 );
+```
