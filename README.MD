@@ -16,12 +16,12 @@
     - [x] create tournament
     - [x] delete tournament
     - [x] edit tournament 
-- signup confirmation page (token display, etc)
-- signup removal page
-- results page
-- challonge api
-- database error messages or pages
-    - $db->rollback(); perhaps?
+- [ ] signup confirmation page (token display, etc)
+- [ ] signup removal page
+- [ ] results page
+- [ ] challonge api
+- [ ] database error messages or pages
+    - [ ] $db->rollback(); perhaps?
 
 # NEW DB LAYOUT
 
