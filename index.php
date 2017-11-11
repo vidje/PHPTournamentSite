@@ -1,5 +1,5 @@
 <?php
-require_once("inc/__db.php");
+require("inc/__db.php");
 $statement = $db->prepare("SELECT tournament_id, mode, name, tournament_start, description_short FROM tournament
                            ORDER BY date_added DESC;");
 $statement->execute();

@@ -36,54 +36,55 @@ $db->beginTransaction();
 
 // wrap inside try/catch
 // if it errors out, rollback & display error
-try {
-  
-  // insert player values
-  $query = "INSERT INTO player (player_id, team_id, name, contact) VALUES (?, ?, ?, ?)";
-  $statement = $db->prepare($query);
-  $statement->execute(array(
-                            $player1_id, 
-                            $team_id, 
-                            $player1,
-                            $cmail
-  ));
-  $statement->execute(array(
-                            $player2_id, 
-                            $team_id, 
-                            $player2,
-                            NULL
-  ));
-  $statement->execute(array(
-                            $player3_id, 
-                            $team_id, 
-                            $player3,
-                            NULL
-  ));
-  $statement->execute(array(
-                            $player4_id, 
-                            $team_id, 
-                            $player4,
-                            NULL
-  ));
-  
-  // insert team values
-  $query = "INSERT INTO team (team_id, tournament_id, name, signup_date, token) VALUES (?, ?, ?, ?, ?)";
-  $statement = $db->prepare($query);
-  $statement->execute(array(
-                            $team_id,
-                            $tid,
-                            $tname,
-                            $date,
-                            $token
-  ));
-  
-  // commit the changes
-  $db->commit();
+try
+{
+    // insert team values
+    $query = "INSERT INTO team (team_id, tournament_id, name, signup_date, token) VALUES (?, ?, ?, ?, ?)";
+    $statement = $db->prepare($query);
+    $statement->execute(array(
+        $team_id,
+        $tid,
+        $tname,
+        $date,
+        $token
+    ));
+
+    // insert player values
+    $query = "INSERT INTO player (player_id, team_id, name, contact) VALUES (?, ?, ?, ?)";
+    $statement = $db->prepare($query);
+    $statement->execute(array(
+        $player1_id,
+        $team_id,
+        $player1,
+        $cmail
+    ));
+    $statement->execute(array(
+        $player2_id,
+        $team_id,
+        $player2,
+        NULL
+    ));
+    $statement->execute(array(
+        $player3_id,
+        $team_id,
+        $player3,
+        NULL
+    ));
+    $statement->execute(array(
+        $player4_id,
+        $team_id,
+        $player4,
+        NULL
+    ));
+
+    // commit the changes
+    $db->commit();
 }
 
 // handle exceptions
-catch(Exception $e) {
-  echo $e->getMessage();
-  $db->rollback();
+catch (Exception $e)
+{
+    echo $e->getMessage();
+    $db->rollback();
 }
 ?>

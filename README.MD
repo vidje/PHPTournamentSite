@@ -7,18 +7,21 @@
 
 # TO DO LIST
 
-* replace JOIN ON with JOIN USING if possible (e.g., SELECT foo, bar FROM foo INNER JOIN bar USING (id))
-* make setup script
-* create a menu
-* login system for admin 
-* remake admin page
-  - show all tournaments
-  - create tournament
-  - delete tournament
-  - edit tournament 
-* signup confirmation page (token display, etc)
-* signup removal page
-* results page
+- [ ] replace JOIN ON with JOIN USING if possible (e.g., SELECT foo, bar FROM foo INNER JOIN bar USING (id))
+- [ ] make setup script
+- [ ] create a menu
+- [ ] login system for admin 
+- [x] remake admin page
+    - [x] show all tournaments
+    - [x] create tournament
+    - [x] delete tournament
+    - [x] edit tournament 
+- signup confirmation page (token display, etc)
+- signup removal page
+- results page
+- challonge api
+- database error messages or pages
+    - $db->rollback(); perhaps?
 
 # NEW DB LAYOUT
 
@@ -64,19 +67,6 @@ CREATE TABLE tournament
   date_added        INT(10) UNSIGNED
 );
 ```
-
-```
-CREATE TABLE player
-(
-  player_id         BINARY(20) UNIQUE PRIMARY KEY,
-  team_id           BINARY(20),
-  name              VARCHAR(20),
-  contact           VARCHAR(30),
-  
-  FOREIGN KEY (team_id) REFERENCES team (team_id)
-);
-```
-
 ```
 CREATE TABLE team
 (
@@ -87,9 +77,21 @@ CREATE TABLE team
   token             BINARY(16) UNIQUE,
   
   FOREIGN KEY (tournament_id) REFERENCES tournament (tournament_id)
+    ON UPDATE NO ACTION ON DELETE CASCADE
 );
 ```
-
+```
+CREATE TABLE player
+(
+  player_id         BINARY(20) UNIQUE PRIMARY KEY,
+  team_id           BINARY(20),
+  name              VARCHAR(20),
+  contact           VARCHAR(30),
+  
+  FOREIGN KEY (team_id) REFERENCES team (team_id)
+    ON UPDATE NO ACTION ON DELETE CASCADE
+);
+```
 ```
 CREATE TABLE team_player
 (
