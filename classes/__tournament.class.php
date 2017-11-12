@@ -193,13 +193,10 @@ class TournamentRepository
     }
 
     // delete tournament method
-    function del($tournament)
+    function del($id)
     {
         // connect to db
         require ("inc/__db.php");
-
-        // grab tournament id
-        $id = $_GET["id"];
 
         // create and execute the delete query
         $query = "DELETE FROM `tournament`

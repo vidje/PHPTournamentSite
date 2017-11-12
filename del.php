@@ -29,8 +29,7 @@ elseif (!empty($id) && !empty($_GET["confirm"]))
 {
     $id = $_GET["id"];
 
-    $tournament = $repository->get($id);
-    $repository->del($tournament);
+    $repository->del($id);
 }
 elseif (empty($id))
 {
